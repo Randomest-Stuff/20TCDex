@@ -25,7 +25,7 @@ class Battle(commands.GroupCog):
 
 
 ## Honestly i have no idea what you want to do with this code. You are supposed to make functions like this though, as it's used plenty of times.
-    """
+
     def get_trade(
         self,
         interaction: discord.Interaction | None = None,
@@ -33,6 +33,7 @@ class Battle(commands.GroupCog):
         channel: discord.TextChannel | None = None,
         user: discord.User | discord.Member = MISSING,
     ) -> tuple[TradeMenu, TradingUser] | tuple[None, None]:
+        """
         Find an ongoing trade for the given interaction.
 
         Parameters
@@ -45,6 +46,7 @@ class Battle(commands.GroupCog):
         tuple[TradeMenu, TradingUser] | tuple[None, None]
             A tuple with the `TradeMenu` and `TradingUser` if found, else `None`.
         guild: discord.Guild
+        """
         if interaction:
             guild = cast(discord.Guild, interaction.guild)
             channel = cast(discord.TextChannel, interaction.channel)
@@ -81,7 +83,7 @@ class Battle(commands.GroupCog):
 
         for trade in to_remove:
             self.trades[guild.id][channel.id].remove(trade)
-        return (trade, trader)"""
+        return (trade, trader)
 
     @app_commands.command()
     async def begin(self, interaction: discord.Interaction["BallsDexBot"], user: discord.User):
