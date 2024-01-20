@@ -34,3 +34,6 @@ static
 # settings
 config.yml
 docker-compose.override.yml
+
+# are you fr
+.env
