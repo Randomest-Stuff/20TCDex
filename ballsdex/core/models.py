@@ -146,6 +146,7 @@ class Ball(models.Model):
         max_length=256, description="Description of the countryball's capacity"
     )
     capacity_logic = fields.JSONField(description="Effect of this capacity", default={})
+    created_at = fields.DatetimeField(auto_now_add=True, null=True)
 
     instances: fields.BackwardFKRelation[BallInstance]
 
@@ -339,6 +340,12 @@ class DonationPolicy(IntEnum):
     ALWAYS_DENY = 3
 
 
+class PrivacyPolicy(IntEnum):
+    ALLOW = 1
+    DENY = 2
+    SAME_SERVER = 3
+
+
 class Player(models.Model):
     discord_id = fields.BigIntField(
         description="Discord user ID", unique=True, validators=[DiscordSnowflakeValidator()]
@@ -347,6 +354,11 @@ class Player(models.Model):
         DonationPolicy,
         description="How you want to handle donations",
         default=DonationPolicy.ALWAYS_ACCEPT,
+    )
+    privacy_policy = fields.IntEnumField(
+        PrivacyPolicy,
+        description="How you want to handle privacy",
+        default=PrivacyPolicy.DENY,
     )
     balls: fields.BackwardFKRelation[BallInstance]
 
